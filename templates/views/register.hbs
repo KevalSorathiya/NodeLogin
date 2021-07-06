@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>headerLink}}
+</head>
+<body>
+    {{>navbar}}
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div>
+                <div class="col-md-6 col-12 mt-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="title text-center" id="form">Registration Form</p>
+                            <form action="/register" method="POST" enctype= "multipart/form-data">
+                                <div class="form-group">
+                                    <label for="firstname">Firstname:</label>
+                                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter firstname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname">Lastname:</label>
+                                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter lastname">         
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">         
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone:</label>
+                                    <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter your Phone no.">         
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">         
+                                </div>
+                                 <div class="form-group">
+                                    <label for="confirmpassword">Confirm Password:</label>
+                                    <input type="password" name="confirmpassword" id="confirmpassword" class="form-control" placeholder="Enter your confirm password">         
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender:</label>
+                                    <select name="gender" class="form-control">
+                                        <option value="" selected>--- select gender ---</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>                    
+                                <div class="from-group">
+                                    <input type="file" id="profile" class="form-control mb-4" name="profile" placeholder="select jpg or png file" accept="image/png image/jpeg">
+                                </div>
+                                <div class="form-group  text-center">
+                                    <button type="submit" class="btn btn-success">
+                                        Submit
+                                    </button>
+                                     <button type="cancel" class="btn btn-danger" onclick="cancel()">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+    {{>footer}}
+    {{>footerLink}}
+</body>
+</body>
+</html>

@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-group .forget {
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: burlywood;
+}
+
+.card {
+    box-shadow: 0.3rem 0.3rem 1.2rem whitesmoke;
+}
+
+.navbar-brand,
+.nav-link {
+    color: black;
+}
+
+footer {
+    width: 100%;
+    background-color: burlywood;
+    margin-top: auto;
+}
+
+footer h5 {
+    line-height: 3rem;
+}
