@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 const loginSchema = mongoose.Schema({
     firstname: {
@@ -36,14 +37,12 @@ const loginSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required !!'],
-        minLength: 8,
-        maxLength: 14
+        minLength: 8
     },
     confirmpassword: {
         type: String,
         required: [true, 'Confirm password is required !!'],
-        minLength: 8,
-        maxLength: 14
+        minLength: 8
     },
     gender: {
         type: String,
@@ -67,8 +66,25 @@ const loginSchema = mongoose.Schema({
             default: Date.now()
         }
     },
-
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
 });
+
+loginSchema.methods.genarateAuthToken = async function() {
+    try {
+        const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
+        this.tokens = this.tokens.concat({ token: token });
+        await this.save();
+        return token;
+    } catch (error) {
+        console.log(`Error is: ${error}`);
+    }
+}
+
 
 loginSchema.pre('save', async function(next) {
     try {

@@ -22,6 +22,12 @@ body {
     background-color: burlywood;
 }
 
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card {
     box-shadow: 0.3rem 0.3rem 1.2rem whitesmoke;
 }
