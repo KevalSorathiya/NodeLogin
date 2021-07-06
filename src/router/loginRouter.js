@@ -4,6 +4,7 @@ const register = require('../models/loginModel');
 const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const nodemailer = require("nodemailer");
 const auth = require('../middleware/authMiddleware');
 let upload_path = path.join(__dirname, "../../uploads");
 
@@ -37,8 +38,8 @@ router.get('/about', auth, (req, res) => {
     res.status(201).render('about');
 });
 
-router.get('/forgetpassword', (req, res) => {
-    res.status(201).render('forgetpassword');
+router.get('/forgotpassword', (req, res) => {
+    res.status(201).render('forgotpassword');
 });
 
 router.get('/login', (req, res) => {
@@ -71,6 +72,41 @@ router.get('/profile', auth, async(req, res) => {
         res.status(201).render('profile', { userData: user });
     } else {
         res.status(404).send('User not found');
+    }
+});
+
+router.post('/forget', async(req, res) => {
+    let email = req.body.email;
+    let user = await register.findOne({ email: email });
+    if (!user) {
+        res.status(403).send("user not found");
+    } else {
+        let transpoter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "kevalsorthiya1234@gmail.com",
+                pass: '7878731174'
+            },
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true
+        });
+
+        transpoter.sendMail(mailOptions, function(err, info) {
+            if (error) {
+                console.log(error);
+                res.send('error');
+            } else {
+                console.log('Email sent: ' + info.response);
+                res.send('send successfully');
+            }
+        });
+        let message = "Change password link send to your email";
+        res.status(201).send(`message : ${message}`);
+
+
+
+
     }
 });
 
