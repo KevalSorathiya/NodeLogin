@@ -28,6 +28,10 @@ body {
     align-items: center;
 }
 
+.error {
+    color: red;
+}
+
 .card {
     box-shadow: 0.3rem 0.3rem 1.2rem whitesmoke;
 }

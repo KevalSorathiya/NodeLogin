@@ -71,7 +71,11 @@ const loginSchema = mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    forgotpasswordtoken: {
+        type: String,
+        default: ''
+    }
 });
 
 loginSchema.methods.genarateAuthToken = async function() {

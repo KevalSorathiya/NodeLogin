@@ -11,8 +11,9 @@ const cookieParser = require('cookie-parser');
 
 //all static path
 const public_path = path.join(__dirname, "../public");
+const newpassword_public_path = path.join(__dirname, "../../public");
 const favicon_path = path.join(__dirname, "../favicon");
-const upload_path = path.join(__dirname, "../uploads")
+const upload_path = path.join(__dirname, "../uploads");
 const partial_path = path.join(__dirname, "../templates/partials");
 const views_path = path.join(__dirname, "../templates/views");
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set('views', views_path);
 hbs.registerPartials(partial_path);
 app.use(express.static(public_path));
+app.use(express.static(newpassword_public_path));
 app.use(express.static(favicon_path));
 app.use(express.static(upload_path));
 app.use(cookieParser());
@@ -38,7 +40,6 @@ app.use(loginRouter);
 //         return false;
 //     }
 // });
-
 
 app.get('/', (req, res) => {
     res.status(201).render('index');
