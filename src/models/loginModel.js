@@ -4,17 +4,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
+// Login module schema display here
 const loginSchema = mongoose.Schema({
     firstname: {
         type: String,
         required: [true, 'firstname is required'],
-        minLength: 3,
+        minlength: [3, 'minimum 3 letter required'],
         trim: true
     },
     lastname: {
         type: String,
         required: [true, 'lastname is required'],
-        minLength: 3,
+        minlength: [3, 'minimum 3 letter required'],
         trim: true
     },
     email: {
@@ -22,7 +23,7 @@ const loginSchema = mongoose.Schema({
         required: [true, 'email is required'],
         validate(value) {
             if (!validator.isEmail(value)) {
-                throw new Error('Invalid email address !!');
+                throw new Error('Invalid email address');
             }
         },
         unique: true,
@@ -30,19 +31,19 @@ const loginSchema = mongoose.Schema({
     },
     phone: {
         type: Number,
-        required: [true, 'Phone no is required !!'],
-        min: 10,
+        min: [9, "please enter only 10 deigit"],
+        required: [true, 'Phone no is required'],
         trim: true
     },
     password: {
         type: String,
-        required: [true, 'Password is required !!'],
-        minLength: 8
+        required: [true, 'Password is required'],
+        minlength: 8
     },
     confirmpassword: {
         type: String,
         required: [true, 'Confirm password is required !!'],
-        minLength: 8
+        minlength: 8
     },
     gender: {
         type: String,

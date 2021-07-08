@@ -32,15 +32,15 @@ let uploadImg = multer({
 });
 
 router.get('/', (req, res) => {
-    res.status(201).render('index');
+    res.status(201).render('index', { title: "Home" });
 });
 
 router.get('/about', auth, (req, res) => {
-    res.status(201).render('about');
+    res.status(201).render('about', { title: "About" });
 });
 
 router.get('/login', (req, res) => {
-    res.status(201).render('login');
+    res.status(201).render('login', { title: "Login" });
 });
 
 router.get('/logout', auth, async(req, res) => {
@@ -58,14 +58,14 @@ router.get('/logout', auth, async(req, res) => {
 });
 
 router.get('/register', (req, res) => {
-    res.status(201).render('register');
+    res.status(201).render('register', { title: "Register" });
 });
 
 router.get('/profile', auth, async(req, res) => {
     let id = req.user._id
     let user = await register.findOne({ _id: id });
     if (user) {
-        res.status(201).render('profile', { userData: user });
+        res.status(201).render('profile', { userData: user, title: "Profile" });
     } else {
         res.status(404).send('User not found');
     }
@@ -121,13 +121,13 @@ router.get('/newpassword/:token', async(req, res) => {
     let forget_password_token = req.params.token;
     jwt.verify(forget_password_token, process.env.RESET_PASSWORD_KEY, async(error, decoded) => {
         if (error) {
-            return res.status(401).send('Incorrect token or it is expired');
+            res.status(401).send('Incorrect token or it is expired');
         } else {
             let userData = await register.findOne({ forgotpasswordtoken: forget_password_token.toString() });
             if (userData) {
                 res.status(200).render('newpassword', { token: forget_password_token });
             } else {
-                return res.status(403).send('User forget password token is not found !!!');
+                res.status(403).send('User forget password token is not found !!!');
             }
         }
     });
@@ -224,7 +224,7 @@ router.post('/login', async(req, res) => {
 });
 
 router.get('*', (req, res) => {
-    res.status(404).render('pageNotFound');
+    res.status(404).render('pageNotFound', { title: "Page Not Found" });
 });
 
 module.exports = router;

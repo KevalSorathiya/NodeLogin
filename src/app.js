@@ -8,7 +8,6 @@ const loginRouter = require('./router/loginRouter');
 const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
 
-
 //all static path
 const public_path = path.join(__dirname, "../public");
 const newpassword_public_path = path.join(__dirname, "../../public");
@@ -30,7 +29,7 @@ app.use(express.static(upload_path));
 app.use(cookieParser());
 app.use(loginRouter);
 
-// console.log(req.cookies.jwt);
+
 
 // hbs.registerHelper('token', function() {
 //     const jwtToken = req.cookies.jwt;
